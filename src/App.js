@@ -11,7 +11,6 @@ function App() {
 
   return (
       <Router>
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
         <div className="App">
           <Switch>
             <Route path="/user/:url" exact>
