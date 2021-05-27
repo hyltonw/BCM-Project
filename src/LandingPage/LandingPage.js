@@ -42,6 +42,7 @@ if(locations.includes(",") && locations.length > 1){
         prevComma = i+1;
         }
     }
+    locationList.push(locations.slice(prevComma,locations.length))
 } else {
     locationList.push(locations)
 }
