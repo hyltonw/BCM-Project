@@ -10,6 +10,10 @@ function App() {
 
   return (
       <Router>
+        <div id="header">
+          <img id ="logo"src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Baylor_College_of_Medicine_Logo.png"></img>
+          <h1>Baylor College of Medicine</h1>
+        </div>
         <div className="App">
           <Switch>
             <Route path="/user/:url" exact>
