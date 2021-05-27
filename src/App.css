@@ -14,6 +14,10 @@
   border-radius: 10px;
 }
 
+#generated-file {
+  overflow-wrap: anywhere;
+}
+
 #buttonDiv {
   display: flex;
   flex-direction: row;

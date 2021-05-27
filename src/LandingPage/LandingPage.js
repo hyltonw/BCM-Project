@@ -61,6 +61,7 @@ function submitForm(){
         console.log(ReviewedFile)
         submitFiles(ReviewedFile)
     }
+    
 }
 
 
@@ -70,7 +71,7 @@ return (
       <div id="container">
         
         {locationList.map((locations) => (
-          <div id="GeneratedFile">
+          <div id="generated-file">
             <p id="filePath">{locations}</p>
             <div id="buttonDiv">
               <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
