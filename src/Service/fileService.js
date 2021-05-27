@@ -7,7 +7,7 @@ import axios from 'axios'
 // }
 
 export async function getAllLocations(url){
-    const locations=await axios.get(`http://bcm-project.bcmfilelverification.com/api/files/${url}`)
+    const locations=await axios.get(`https://bcm-project.bcmfilelverification.com/api/files/${url}`)
     // console.log(locations.data)
     const data=locations.data;
     return data;
