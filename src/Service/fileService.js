@@ -7,7 +7,7 @@ import axios from 'axios'
 // }
 
 export async function getAllLocations(url){
-    const locations=await axios.get(`http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/${url}`)
+    const locations=await axios.get(`http://bcm-project.bcmfilelverification.com/api/files/${url}`)
     // console.log(locations.data)
     const data=locations.data;
     return data;
@@ -15,7 +15,7 @@ export async function getAllLocations(url){
 }
 
 export function submitFiles(ReviewedFile){
-    axios.post(`http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/reviewed`,ReviewedFile)
+    axios.post(`https://bcm-project.bcmfilelverification.com/api/reviewed`,ReviewedFile)
 }
 
 export default (getAllLocations,submitFiles)
