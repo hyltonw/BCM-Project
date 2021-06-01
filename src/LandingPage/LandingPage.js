@@ -8,8 +8,8 @@ export function LandingPage(){
 
 const [locations, setLocations] = useState("LOCATION");
 const [displayName, setDisplayName] = useState("USER");
-const [firstName, setFirstName] = useState("FIRST NAME")
-const [lastName, setLastName] = useState("LAST NAME")
+const [firstName, setFirstName] = useState("")
+const [lastName, setLastName] = useState("")
 const [email, setEmail] = useState("EMAIL")
 const [cards, setCards] = useState([]);
 
@@ -51,24 +51,37 @@ if(locations.includes(",") && locations.length > 1){
 function submitForm(){
     if(locationList.length===1){
         console.log(locationList[0])
-    }
-    for(let i=0;i<locationList.length;i++){
-        const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
-        console.log(locationList[i])
-        console.log(document.querySelectorAll(`input[name="${locationList[i]}"]`))
+        console.log("ONE")
+        const selection = document.querySelectorAll(`input`)
         const ReviewedFile = {
             firstName : firstName,
             lastName : lastName,
             email : email,
-            location : locationList[i],
+            location : locationList[0],
             keepFile : selection[0].checked,
             deleteFile : selection[1].checked,
             sendToIT :selection[2].checked
         }
         console.log(ReviewedFile)
         submitFiles(ReviewedFile)
+    } else {
+        for(let i=0;i<locationList.length;i++){
+            const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
+            console.log(locationList[i])
+            console.log(document.querySelectorAll(`input[name="${locationList[i]}"]`))
+            const ReviewedFile = {
+                firstName : firstName,
+                lastName : lastName,
+                email : email,
+                location : locationList[i],
+                keepFile : selection[0].checked,
+                deleteFile : selection[1].checked,
+                sendToIT :selection[2].checked
+            }
+            console.log(ReviewedFile)
+            submitFiles(ReviewedFile)
+        }
     }
-    
 }
 
 return (
