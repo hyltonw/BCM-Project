@@ -21,13 +21,14 @@ let prevComma = 0;
 useEffect(()=> {
   getAllLocations(url).then((response)=>
   {
-    if(response.firstName === null){
+    if(response.firstName != ""){
         setFirstName(response.firstName)
         setLastName(response.lastName)
         setDisplayName(response.firstName +" "+ response.lastName)
     } else {
         setDisplayName(response.url)
     }
+    
     setEmail(response.email)
     setLocations(response.location.replace(/\s/g, ''))
   })
