@@ -49,6 +49,9 @@ if(locations.includes(",") && locations.length > 1){
 }
 
 function submitForm(){
+    if(locationList.length===1){
+        console.log(locationList[0])
+    }
     for(let i=0;i<locationList.length;i++){
         const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
         console.log(locationList[i])
@@ -58,12 +61,12 @@ function submitForm(){
             lastName : lastName,
             email : email,
             location : locationList[i],
-            // keepFile : selection[0].checked,
-            // deleteFile : selection[1].checked,
-            // sendToIT :selection[2].checked
+            keepFile : selection[0].checked,
+            deleteFile : selection[1].checked,
+            sendToIT :selection[2].checked
         }
         console.log(ReviewedFile)
-        // submitFiles(ReviewedFile)
+        submitFiles(ReviewedFile)
     }
     
 }
