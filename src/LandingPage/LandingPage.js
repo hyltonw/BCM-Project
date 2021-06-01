@@ -21,12 +21,12 @@ let prevComma = 0;
 useEffect(()=> {
   getAllLocations(url).then((response)=>
   {
-    if(response.firstName != null){
+    if(response.firstName === null){
         setFirstName(response.firstName)
         setLastName(response.lastName)
         setDisplayName(response.firstName +" "+ response.lastName)
     } else {
-      setDisplayName(url)
+        setDisplayName(response.url)
     }
     setEmail(response.email)
     setLocations(response.location.replace(/\s/g, ''))
@@ -50,21 +50,22 @@ if(locations.includes(",") && locations.length > 1){
 function submitForm(){
     for(let i=0;i<locationList.length;i++){
         const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
+        // console.log(document.querySelector(`input[name="${locationList[i]}"]`))
+        console.log(locationList)
         const ReviewedFile = {
             firstName : firstName,
             lastName : lastName,
             email : email,
             location : locationList[i],
-            keepFile : selection[0].checked,
-            deleteFile : selection[1].checked,
-            sendToIT :selection[2].checked
+            // keepFile : selection[0].checked,
+            // deleteFile : selection[1].checked,
+            // sendToIT :selection[2].checked
         }
         console.log(ReviewedFile)
-        submitFiles(ReviewedFile)
+        // submitFiles(ReviewedFile)
     }
     
 }
-
 
 return (
     <div>
