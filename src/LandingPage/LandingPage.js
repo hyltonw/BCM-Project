@@ -51,8 +51,8 @@ if(locations.includes(",") && locations.length > 1){
 function submitForm(){
     for(let i=0;i<locationList.length;i++){
         const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
-        // console.log(document.querySelector(`input[name="${locationList[i]}"]`))
-        console.log(locationList)
+        console.log(locationList[i])
+        console.log(document.querySelectorAll(`input[name="${locationList[i]}"]`))
         const ReviewedFile = {
             firstName : firstName,
             lastName : lastName,
