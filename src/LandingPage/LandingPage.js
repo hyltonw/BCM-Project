@@ -21,6 +21,8 @@ let prevComma = 0;
 useEffect(()=> {
   getAllLocations(url).then((response)=>
   {
+
+
     if(response.firstName != ""){
         setFirstName(response.firstName)
         setLastName(response.lastName)
@@ -85,7 +87,7 @@ function submitForm(){
 }
 
 return (
-    <div>
+    <div id="items">
         <p>Hello, {displayName}! Please review the files that contain sensitive information below and select what you would like to do with them.</p>
         <div id="container">
             {locationList.map((locations) => (
