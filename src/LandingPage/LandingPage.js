@@ -93,25 +93,38 @@ function submitForm(){
 }
 
 return (
-    <div id="items">
-        <p>Hello, {displayName}! Please review the files that contain sensitive information below and select what you would like to do with them.</p>
-        <div id="container">
-            {locationList.map((locations) => (
-            <div id="generated-file">
-                <p id="filePath">{locations}</p>
-                <div id="buttonDiv">
-                    <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
-                    <p>Save</p>
-                    <input type="radio" value="delete" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
-                    <p>Delete</p>
-                    <input type="radio" value="send to IT" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
-                    <p>send to IT</p>
-                </div>
+    <div>
+        {locations==="WARNING" ? (
+        <div>
+            <div id="warning-container">
+                <p>It appears you have too many files to manually review.</p>
+                <p>Please contact an administrator to help you with this issue.</p>
             </div>
-            ))}
         </div>
-        <p>Verify that all files are marked before submitting this form</p>
-        <button id="submitButton"  onClick={submitForm}>Submit</button>
+
+        ) : (
+            <div id="items">
+            <p>Hello, {displayName}! Please review the files that contain sensitive information below and select what you would like to do with them.</p>
+            <div id="container">
+                {locationList.map((locations) => (
+                <div id="generated-file">
+                    <p id="filePath">{locations}</p>
+                    <div id="buttonDiv">
+                        <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
+                        <p>Save</p>
+                        <input type="radio" value="delete" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
+                        <p>Delete</p>
+                        <input type="radio" value="send to IT" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
+                        <p>send to IT</p>
+                    </div>
+                </div>
+                ))}
+            </div>
+            <p>Verify that all files are marked before submitting this form</p>
+            <button id="submitButton"  onClick={submitForm}>Submit</button>
+        </div>
+        )}
+        
     </div>
 )}
 

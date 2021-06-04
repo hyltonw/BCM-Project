@@ -16,6 +16,12 @@
   color: black;
 }
 
+#warning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #items {
   display: flex;
   flex-direction: column;
