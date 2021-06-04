@@ -38,13 +38,16 @@ useEffect(()=> {
 if(locations.includes(",") && locations.length > 1){
     for(let i=0;i<locations.length;i++ && locations.length!=0){
         if(locations.charAt(i) === ","){
-            if(!locationList.includes(locations.slice(prevComma,i))){
+            var lastLocation = locations.slice(prevComma,i)
+            if(!locationList.includes(lastLocation)){
                 locationList.push(locations.slice(prevComma,i))
             }
         prevComma = i+1;
         }
     }
-    locationList.push(locations.slice(prevComma,locations.length))
+    if(!locationList.includes(locations.slice(prevComma,locations.length))){
+        locationList.push(locations.slice(prevComma,locations.length))
+    }
 } else {
     locationList.push(locations)
 }
