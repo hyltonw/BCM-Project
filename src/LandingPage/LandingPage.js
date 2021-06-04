@@ -51,8 +51,8 @@ if(locations.includes(",") && locations.length > 1){
 
 function submitForm(){
     if(locationList.length===1){
-        console.log(locationList[0])
-        console.log("ONE")
+        // console.log(locationList[0])
+        // console.log("ONE")
         const selection = document.querySelectorAll(`input`)
         const ReviewedFile = {
             firstName : firstName,
@@ -63,27 +63,27 @@ function submitForm(){
             deleteFile : selection[1].checked,
             sendToIT :selection[2].checked
         }
-        console.log(ReviewedFile)
+        // console.log(ReviewedFile)
         submitFiles(ReviewedFile)
     } else {
         for(let i=0,j=0;j<locationList.length;i+=3,j++){
-            console.log(document.querySelectorAll(`input`))
+            // console.log(document.querySelectorAll(`input`))
             // const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
             const selection = document.querySelectorAll(`input`)
-            console.log(locationList[i])
-            console.log(selection[0])
-            console.log(selection[1])
-            console.log(selection[2])
+            // console.log(locationList[j])
+            // console.log(selection[0])
+            // console.log(selection[1])
+            // console.log(selection[2])
             const ReviewedFile = {
                 firstName : firstName,
                 lastName : lastName,
                 email : email,
-                location : locationList[i],
+                location : locationList[j],
                 keepFile : selection[i].checked,
                 deleteFile : selection[i+1].checked,
                 sendToIT :selection[i+2].checked
             }
-            console.log(ReviewedFile)
+            // console.log(ReviewedFile)
             submitFiles(ReviewedFile)
         }
     }
@@ -107,6 +107,7 @@ return (
             </div>
             ))}
         </div>
+        <p>Verify that all files are marked before submitting this form</p>
         <button id="submitButton"  onClick={submitForm}>Submit</button>
     </div>
 )}
