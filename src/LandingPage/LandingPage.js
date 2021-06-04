@@ -6,12 +6,11 @@ export function LandingPage(){
 // const email = "saniesal@bcm.edu"
 
 
-const [locations, setLocations] = useState("LOCATION");
+const [locations, setLocations] = useState("");
 const [displayName, setDisplayName] = useState("USER");
 const [firstName, setFirstName] = useState("")
 const [lastName, setLastName] = useState("")
 const [email, setEmail] = useState("EMAIL")
-const [cards, setCards] = useState([]);
 
 const {url} = useParams();
 
@@ -67,18 +66,22 @@ function submitForm(){
         console.log(ReviewedFile)
         submitFiles(ReviewedFile)
     } else {
-        for(let i=0;i<locationList.length;i++){
-            const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
+        for(let i=0,j=0;j<locationList.length;i+=3,j++){
+            console.log(document.querySelectorAll(`input`))
+            // const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
+            const selection = document.querySelectorAll(`input`)
             console.log(locationList[i])
-            console.log(document.querySelectorAll(`input[name="${locationList[i]}"]`))
+            console.log(selection[0])
+            console.log(selection[1])
+            console.log(selection[2])
             const ReviewedFile = {
                 firstName : firstName,
                 lastName : lastName,
                 email : email,
                 location : locationList[i],
-                keepFile : selection[0].checked,
-                deleteFile : selection[1].checked,
-                sendToIT :selection[2].checked
+                keepFile : selection[i].checked,
+                deleteFile : selection[i+1].checked,
+                sendToIT :selection[i+2].checked
             }
             console.log(ReviewedFile)
             submitFiles(ReviewedFile)
