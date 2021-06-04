@@ -15,7 +15,7 @@ export async function getAllLocations(url){
 }
 
 export function submitFiles(ReviewedFile){
-    axios.post(`https://bcm-project.bcmfilelverification.com/api/reviewed`,ReviewedFile)
+    axios.post(`https://bcm-project.bcmfilelverification.com/api/reviewed/`,ReviewedFile)
     window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/submitted`)
 }
 

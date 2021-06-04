@@ -11,6 +11,7 @@ const [displayName, setDisplayName] = useState("USER");
 const [firstName, setFirstName] = useState("")
 const [lastName, setLastName] = useState("")
 const [email, setEmail] = useState("EMAIL")
+var radioCount = document.querySelectorAll(`input`)
 
 const {url} = useParams();
 
@@ -32,6 +33,8 @@ useEffect(()=> {
     
     setEmail(response.email)
     setLocations(response.location.replace(/\s/g, ''))
+    radioCount = document.querySelectorAll(`input`)
+    console.log(radioCount)
   })
 },[])
 
@@ -41,6 +44,7 @@ if(locations.includes(",") && locations.length > 1){
             var lastLocation = locations.slice(prevComma,i)
             if(!locationList.includes(lastLocation)){
                 locationList.push(locations.slice(prevComma,i))
+                radioCount = document.querySelectorAll(`input`)
             }
         prevComma = i+1;
         }
