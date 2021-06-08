@@ -5,6 +5,8 @@ import {BrowserRouter as Router, Route } from 'react-router-dom'
 import React, { useState, useEffect } from 'react';
 import {LandingPage} from "./LandingPage/LandingPage"
 import { SubmitPage } from './SubmitPage/SubmitPage';
+import { AdminPage } from './AdminPage/AdminPage';
+
 
 function App() {
 
@@ -21,6 +23,9 @@ function App() {
             </Route>
             <Route path="/submitted">
               <SubmitPage/>
+            </Route>
+            <Route path="/admin">
+              <AdminPage/>
             </Route>
           </Switch>
         </div>

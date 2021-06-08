@@ -109,7 +109,7 @@ return (
         ) : (
             <div id="items">
             <p>Hello, {displayName}! Please review the files that contain sensitive information below and select what you would like to do with them.</p>
-            <div id="container">
+            <div class="container">
                 {locationList.map((locations) => (
                 <div id="generated-file">
                     <p id="filePath">{locations}</p>
@@ -117,7 +117,7 @@ return (
                         <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
                         <p>Save</p>
                         <input type="radio" value="delete" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
-                        <p>Delete</p>
+                        <p>I have deleted this file</p>
                         <input type="radio" value="send to IT" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
                         <p>send to IT</p>
                     </div>
