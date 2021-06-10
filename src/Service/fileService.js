@@ -8,7 +8,6 @@ import axios from 'axios'
 
 export async function getAllLocations(url){
     const locations=await axios.get(`https://bcm-project.bcmfilelverification.com/api/files/${url}`)
-    // console.log(locations.data)
     const data=locations.data;
     return data;
 
@@ -19,4 +18,16 @@ export function submitFiles(ReviewedFile){
     window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/submitted`)
 }
 
-export default (getAllLocations,submitFiles)
+export async function getAllUsers(){
+    const users =await axios.get(`https://bcm-project.bcmfilelverification.com/api/files/allUsers`)
+    const data = users.data;
+    return data;
+}
+
+export async function transferFiles(newOwner,oldOwner){
+    console.log(newOwner)
+    console.log(oldOwner)
+    axios.put(`https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,newOwner)
+}
+
+export default (getAllLocations,submitFiles,getAllUsers)

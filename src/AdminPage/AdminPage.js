@@ -1,6 +1,48 @@
 import './AdminPage.css'
+import React, {isValidElement, useEffect, useState} from 'react';
+import { Hint } from 'react-autocomplete-hint';
+import {getAllUsers,getAllLocations,transferFiles} from '../Service/fileService'
+
 
 export function AdminPage(){
+
+    const [hintData, setHintData] = useState(["user1,user2,user3"])
+    const [text, setText] =useState('')
+    const [locations, setLocations] =useState('');
+
+
+
+    useEffect(() => {
+        getAllUsers().then((response) => 
+        {
+            setHintData(response)
+        })
+    },[])
+
+
+        //this fetches the file locations after a user clicks off the input box for emails
+    function fetchLocations(){
+        var url = document.getElementById('old-email').value;
+        url = url.substring(0, url.indexOf('@'))
+
+        getAllLocations(url).then((response) => {
+            setLocations(response.location)
+        })
+    }
+
+    console.log(locations)
+
+    function transferOwnership(){
+        return function () {
+            var oldEmail = document.getElementById('old-email').value;
+            var newEmail = document.getElementById('new-email').value;
+            var newFileLocation = {
+                email : newEmail
+            }
+            transferFiles(newFileLocation,oldEmail)
+        }
+    }
+
     return (
     <div id="submissionText">
         <div class="container">
@@ -8,20 +50,26 @@ export function AdminPage(){
                 <p>Select which user you would like to transfer file ownership away from</p>
                 <p>enter the new email you would like to transfer ownership to</p>
                 <div id="user-select">
-                    <select>
-                        <option>user1</option>
-                        <option>user2</option>
-                        <option>user3</option>
-                        <option>user4</option>
-                    </select>
-                    <input placeholder="new email"></input>
+                    <Hint options={hintData} allowTabFill>
+                        <input 
+                        id="old-email"
+                        onBlur={fetchLocations}
+                        placeholder="old email"
+                        value={text}
+                        onChange={e => setText(e.target.value)}
+                        />
+                    </Hint>
+                    <input
+                    id="new-email"
+                    placeholder="new email"
+                    />
                 </div>
                 <div id="transfer-button">
                     <p>this will transfer the following files</p>
-                    <button>Transfer</button>
+                    <button onClick={transferOwnership()}>Transfer</button>
                 </div>
                 <div id="file-list">
-                    
+
                 </div>
             </div>
         </div>

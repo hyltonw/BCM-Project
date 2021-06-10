@@ -23,7 +23,7 @@ useEffect(()=> {
   {
 
 
-    if(response.firstName != ""){
+    if(response.firstName !== "" && response.firstName !== null){
         setFirstName(response.firstName)
         setLastName(response.lastName)
         setDisplayName(response.firstName +" "+ response.lastName)
@@ -39,7 +39,7 @@ useEffect(()=> {
 },[])
 
 if(locations.includes(",") && locations.length > 1){
-    for(let i=0;i<locations.length;i++ && locations.length!=0){
+    for(let i=0;i<locations.length;i++ && locations.length!==0){
         if(locations.charAt(i) === ","){
             var lastLocation = locations.slice(prevComma,i)
             if(!locationList.includes(lastLocation)){
@@ -108,14 +108,14 @@ return (
 
         ) : (
             <div id="items">
-            <p>Hello, {displayName}! Please review the files that contain sensitive information below and select what you would like to do with them.</p>
+            <p>Hello, {displayName}! Please review the files that may contain sensitive information below and select what you would like to do with them.</p>
             <div class="container">
                 {locationList.map((locations) => (
                 <div id="generated-file">
                     <p id="filePath">{locations}</p>
                     <div id="buttonDiv">
                         <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
-                        <p>Save</p>
+                        <p>Does not contain sensitive information / Do not delete</p>
                         <input type="radio" value="delete" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
                         <p>I have deleted this file</p>
                         <input type="radio" value="send to IT" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
