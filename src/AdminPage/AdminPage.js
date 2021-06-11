@@ -1,16 +1,15 @@
 import './AdminPage.css'
-import React, {isValidElement, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Hint } from 'react-autocomplete-hint';
 import {getAllUsers,getAllLocations,transferFiles} from '../Service/fileService'
 
 
 export function AdminPage(){
 
-    const [hintData, setHintData] = useState(["user1,user2,user3"])
+    const [hintData, setHintData] = useState([""])
     const [text, setText] =useState('')
     const [locations, setLocations] =useState('');
-
-
+    
 
     useEffect(() => {
         getAllUsers().then((response) => 
@@ -30,17 +29,17 @@ export function AdminPage(){
         })
     }
 
-    console.log(locations)
-
     function transferOwnership(){
-        return function () {
-            var oldEmail = document.getElementById('old-email').value;
-            var newEmail = document.getElementById('new-email').value;
-            var newFileLocation = {
-                email : newEmail
-            }
-            transferFiles(newFileLocation,oldEmail)
+
+        var oldEmail = document.getElementById('old-email').value;
+        var newEmail = document.getElementById('new-email').value;
+        var newFileLocation = {
+            email : newEmail
         }
+        transferFiles(newFileLocation,oldEmail)
+        var url = newEmail
+        url = url.substring(0, url.indexOf('@'))
+        window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`)
     }
 
     return (
@@ -50,7 +49,7 @@ export function AdminPage(){
                 <p>Select which user you would like to transfer file ownership away from</p>
                 <p>enter the new email you would like to transfer ownership to</p>
                 <div id="user-select">
-                    <Hint options={hintData} allowTabFill>
+                    {/* <Hint options={hintData} allowTabFill>
                         <input 
                         id="old-email"
                         onBlur={fetchLocations}
@@ -58,7 +57,16 @@ export function AdminPage(){
                         value={text}
                         onChange={e => setText(e.target.value)}
                         />
-                    </Hint>
+                    </Hint> */}
+
+                    <input
+                    id="old-email"
+                    onBlur={fetchLocations}
+                    placeholder="old email"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    />
+
                     <input
                     id="new-email"
                     placeholder="new email"
@@ -66,7 +74,7 @@ export function AdminPage(){
                 </div>
                 <div id="transfer-button">
                     <p>this will transfer the following files</p>
-                    <button onClick={transferOwnership()}>Transfer</button>
+                    <button onClick={transferOwnership}>Transfer</button>
                 </div>
                 <div id="file-list">
 

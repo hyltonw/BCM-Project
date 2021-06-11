@@ -25,9 +25,8 @@ export async function getAllUsers(){
 }
 
 export async function transferFiles(newOwner,oldOwner){
-    console.log(newOwner)
-    console.log(oldOwner)
-    axios.put(`https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,newOwner)
+    // axios.put(`https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,newOwner)
+    axios.put(`http://localhost:8080/api/files/${oldOwner}`,newOwner)
 }
 
 export default (getAllLocations,submitFiles,getAllUsers)

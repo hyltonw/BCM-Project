@@ -23,7 +23,7 @@ useEffect(()=> {
   {
 
 
-    if(response.firstName !== "" && response.firstName !== null){
+    if(response.firstName != ""){
         setFirstName(response.firstName)
         setLastName(response.lastName)
         setDisplayName(response.firstName +" "+ response.lastName)
