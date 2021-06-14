@@ -29,4 +29,8 @@ export async function transferFiles(newOwner,oldOwner){
     // axios.put(`http://localhost:8080/api/files/${oldOwner}`,newOwner)
 }
 
-export default (getAllLocations,submitFiles,getAllUsers)
+export function deleteFiles(url){
+    axios.delete(`http://localhost:8080/api/files/${url}`)
+}
+
+export default (getAllLocations,submitFiles,getAllUsers,deleteFiles)

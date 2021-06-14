@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import {getAllLocations, submitFiles} from '../Service/fileService'
+import {getAllLocations, submitFiles, deleteFiles} from '../Service/fileService'
 import React, { useState, useEffect } from 'react';
 
 export function LandingPage(){
@@ -72,6 +72,7 @@ function submitForm(){
         }
         // console.log(ReviewedFile)
         submitFiles(ReviewedFile)
+        // deleteFiles(url)
     } else {
         for(let i=0,j=0;j<locationList.length;i+=3,j++){
             // console.log(document.querySelectorAll(`input`))
@@ -92,6 +93,7 @@ function submitForm(){
             }
             // console.log(ReviewedFile)
             submitFiles(ReviewedFile)
+            // deleteFiles(url)
         }
     }
 }
