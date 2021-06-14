@@ -8,7 +8,7 @@ export function AdminPage(){
 
     const [hintData, setHintData] = useState([""])
     const [text, setText] =useState('')
-    const [locations, setLocations] =useState('');
+    const [locations, setLocations] =useState('default');
 
     var locationList = [];
     let prevComma = 0;
@@ -22,14 +22,16 @@ export function AdminPage(){
 
         //this fetches the file locations after a user clicks off the input box for emails
     function fetchLocations(){
-        var url = document.getElementById('old-email').value;
-        url = url.substring(0, url.indexOf('@'))
+        var url = document.getElementById('old-email').value.toString();
+        url = url.replace(/[^a-z0-9@.]/gi,'');
+        if(url == null || url == undefined || url.length === 0){
 
-
-        getAllLocations(url).then((response) => {
-            setLocations(response.location)
-        })
-        
+        } else {
+            url = url.substring(0, url.indexOf('@'))
+            getAllLocations(url).then((response) => {
+                setLocations(response.location)
+            })
+        }    
     }
 
     function transferOwnership(){
@@ -43,50 +45,80 @@ export function AdminPage(){
         var url = newEmail
         url = url.substring(0, url.indexOf('@'))
         setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
-        deleteFiles(url)
-        
+        // deleteFiles(url)
+    }
+
+    if(locations.includes(",") && locations.length > 1){
+        for(let i=0;i<locations.length;i++ && locations.length!==0){
+            if(locations.charAt(i) === ","){
+                var lastLocation = locations.slice(prevComma,i)
+                if(!locationList.includes(lastLocation)){
+                    locationList.push(locations.slice(prevComma,i))
+                }
+            prevComma = i+1;
+            }
+        }
+        if(!locationList.includes(locations.slice(prevComma,locations.length))){
+            locationList.push(locations.slice(prevComma,locations.length))
+        }
+    } else {
+        locationList.push(locations)
     }
 
     console.log(locations)
     console.log(locationList)
     return (
-    <div id="submissionText">
-        <div class="container">
-            <div id="admin-layout">
-                <p>Select which user you would like to transfer file ownership away from</p>
-                <p>enter the new email you would like to transfer ownership to</p>
-                <div id="user-select">
-                    <Hint options={hintData} allowTabFill>
-                        <input 
-                        id="old-email"
-                        onBlur={fetchLocations}
-                        placeholder="old email"
-                        value={text}
-                        onChange={e => setText(e.target.value)}
-                        />
-                    </Hint>
-
-                    {/* <input
+    <div id="admin-container">
+        <div id="admin-layout">
+            <p>Select which user you would like to transfer file ownership away from</p>
+            <p>enter the new email you would like to transfer ownership to</p>
+            <div id="user-select">
+                <Hint options={hintData} allowTabFill>
+                    <input 
                     id="old-email"
                     onBlur={fetchLocations}
                     placeholder="old email"
                     value={text}
                     onChange={e => setText(e.target.value)}
-                    /> */}
-
-                    <input
-                    id="new-email"
-                    placeholder="new email"
+                    pattern="[A-Za-z]"
                     />
-                </div>
+                </Hint>
+
+                {/* <input
+                id="old-email"
+                onBlur={fetchLocations}
+                placeholder="old email"
+                value={text}
+                onChange={e => setText(e.target.value)}
+                /> */}
+
+                <input
+                id="new-email"
+                placeholder="new email"
+                />
+            </div>
+            <div id="transfer-button">
+            </div>
+            {locationList[0]!=='default' ? (
+            <div>
                 <div id="transfer-button">
-                    <p>this will transfer the following files</p>
+                    <p>this will transfer the following {locationList.length} files</p>
                     <button onClick={transferOwnership} disabled={false}>Transfer</button>
                 </div>
                 <div id="file-list">
-                    
-                </div>
+                <ol>
+                    {locationList.map((locations) => (
+                    <li>{locations}</li>
+                    ))}
+                </ol>
             </div>
+            </div>
+            ):(
+            <div>
+                <p>The files will populate here once and email is entered</p>
+            </div>
+            )}
+            
         </div>
     </div>
 )}

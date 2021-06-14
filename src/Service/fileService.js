@@ -30,7 +30,8 @@ export async function transferFiles(newOwner,oldOwner){
 }
 
 export function deleteFiles(url){
-    axios.delete(`http://localhost:8080/api/files/${url}`)
+    axios.delete(`https://bcm-project.bcmfilelverification.com/api/files/${url}`)
+    // axios.delete(`http://localhost:8080/api/files/${url}`)
 }
 
 export default (getAllLocations,submitFiles,getAllUsers,deleteFiles)

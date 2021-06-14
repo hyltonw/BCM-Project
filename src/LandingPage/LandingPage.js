@@ -98,6 +98,8 @@ function submitForm(){
     }
 }
 
+console.log(locations.length);
+
 return (
     <div>
         {locations==="WARNING" || locations.length===0 ? (
