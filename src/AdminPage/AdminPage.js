@@ -1,7 +1,7 @@
 import './AdminPage.css'
 import React, {useEffect, useState} from 'react';
 import { Hint } from 'react-autocomplete-hint';
-import {getAllUsers,getAllLocations,transferFiles} from '../Service/fileService'
+import {getAllUsers,getAllLocations,transferFiles,deleteFiles} from '../Service/fileService'
 
 
 export function AdminPage(){
@@ -42,7 +42,8 @@ export function AdminPage(){
         transferFiles(newFileLocation,oldEmail)
         var url = newEmail
         url = url.substring(0, url.indexOf('@'))
-        setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 3000);
+        setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
+        deleteFiles(url)
         
     }
 
