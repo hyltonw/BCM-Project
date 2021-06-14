@@ -23,12 +23,12 @@ useEffect(()=> {
   {
 
 
-    if(response.firstName != ""){
+    if(response.firstName === "" && response.firstName == null){
+        setDisplayName(response.url)
+    } else {
         setFirstName(response.firstName)
         setLastName(response.lastName)
         setDisplayName(response.firstName +" "+ response.lastName)
-    } else {
-        setDisplayName(response.url)
     }
     
     setEmail(response.email)
@@ -98,10 +98,10 @@ function submitForm(){
 
 return (
     <div>
-        {locations==="WARNING" ? (
+        {locations==="WARNING" || locations.length===0 ? (
         <div>
             <div id="warning-container">
-                <p>It appears you have too many files to manually review.</p>
+                <p>It appears you either have too many files to review manually or your files have been transfered to an administrator.</p>
                 <p>Please contact an administrator to help you with this issue.</p>
             </div>
         </div>
