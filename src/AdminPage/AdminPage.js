@@ -22,25 +22,37 @@ export function AdminPage(){
         })
     },[])
 
+    function removeDuplicates(allLocations){
+        var prevComma = 0;
+        if(allLocations.length > 1 && allLocations.includes(',')){
+            for(var i=0;i<allLocations.length;i++){
+                if(allLocations.charAt(i)===','){
+                    locationList.push(allLocations.substring(prevComma,i))
+                    prevComma = i;
+                }
+            }
+        } else {
+            locationList.push(allLocations)
+        }
+    }
+
         //this fetches the file locations after a user clicks off the input box for emails
-    function fetchLocations(){
+    async function fetchLocations(){
+        console.log("method called")
         var url = document.getElementById('old-email').value.toString();
         url = url.replace(/[^a-z0-9@.]/gi,'');
-        if(url == null || url == undefined || url.length === 0){
-
+        if(url === null || url === undefined || url.length === 0){
+            alert("invalid email entered")
         } else {
             url = url.substring(0, url.indexOf('@'))
             getAllLocations(url).then((response) => {
                 setLocations(response.location)
             })
-        }    
+        }
     }
 
-    if(document.getElementById('old-email')!= undefined && document.getElementById('new-email')!=undefined){
+    if(document.getElementById('old-email')!== null && document.getElementById('new-email')!==null){
         oldEmail = document.getElementById('old-email').value;
-        console.log(oldEmail)
-        console.log(newEmail)
-
     }
 
     function transferOwnership(){
@@ -73,7 +85,6 @@ export function AdminPage(){
         }
     }
 
-    console.log(locationList)
 
     return (
     <div id="admin-container">
@@ -116,7 +127,7 @@ export function AdminPage(){
                 <div id="file-list">
                 <ol>
                     {locationList.map((locations) => (
-                    <li>{locations}</li>
+                    <li key={locations}>{locations}</li>
                     ))}
                 </ol>
             </div>
