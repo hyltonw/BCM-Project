@@ -8,7 +8,7 @@ export function AdminPage(){
 
     const [hintData, setHintData] = useState([""])
     const [text, setText] =useState('')
-    const [locations, setLocations] =useState('default');
+    const [locations, setLocations] =useState([]);
 
     var locationList = [];
     let prevComma = 0;
@@ -38,14 +38,13 @@ export function AdminPage(){
 
     if(document.getElementById('old-email')!= undefined && document.getElementById('new-email')!=undefined){
         oldEmail = document.getElementById('old-email').value;
-        newEmail = document.getElementById('new-email').value;
         console.log(oldEmail)
         console.log(newEmail)
 
     }
 
     function transferOwnership(){
-
+        newEmail = document.getElementById('new-email').value;
         var newFileLocation = {
             email : newEmail
         }
@@ -74,7 +73,7 @@ export function AdminPage(){
         }
     }
 
-    console.log()
+    console.log(locationList)
 
     return (
     <div id="admin-container">
@@ -108,7 +107,7 @@ export function AdminPage(){
             </div>
             <div id="transfer-button">
             </div>
-            {locationList[0]!=='default' ? (
+            {locationList.length>0 ? (
             <div>
                 <div id="transfer-button">
                     <p>this will transfer the following {locationList.length} files</p>
