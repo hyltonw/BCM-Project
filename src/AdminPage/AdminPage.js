@@ -12,6 +12,8 @@ export function AdminPage(){
 
     var locationList = [];
     let prevComma = 0;
+    var oldEmail = "oldEmail";
+    var newEmail = "newEmail";
 
     useEffect(() => {
         getAllUsers().then((response) => 
@@ -34,10 +36,16 @@ export function AdminPage(){
         }    
     }
 
+    if(document.getElementById('old-email')!= undefined && document.getElementById('new-email')!=undefined){
+        oldEmail = document.getElementById('old-email').value;
+        newEmail = document.getElementById('new-email').value;
+        console.log(oldEmail)
+        console.log(newEmail)
+
+    }
+
     function transferOwnership(){
 
-        var oldEmail = document.getElementById('old-email').value;
-        var newEmail = document.getElementById('new-email').value;
         var newFileLocation = {
             email : newEmail
         }
@@ -47,26 +55,27 @@ export function AdminPage(){
         setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
         // deleteFiles(url)
     }
-
-    if(locations.includes(",") && locations.length > 1){
-        for(let i=0;i<locations.length;i++ && locations.length!==0){
-            if(locations.charAt(i) === ","){
-                var lastLocation = locations.slice(prevComma,i)
-                if(!locationList.includes(lastLocation)){
-                    locationList.push(locations.slice(prevComma,i))
+    if(hintData.includes(oldEmail)){
+        if(locations.length > 1 &&locations.includes(",")){
+            for(let i=0;i<locations.length;i++ && locations.length!==0){
+                if(locations.charAt(i) === ","){
+                    var lastLocation = locations.slice(prevComma,i)
+                    if(!locationList.includes(lastLocation)){
+                        locationList.push(locations.slice(prevComma,i))
+                    }
+                prevComma = i+1;
                 }
-            prevComma = i+1;
             }
+            if(!locationList.includes(locations.slice(prevComma,locations.length))){
+                locationList.push(locations.slice(prevComma,locations.length))
+            }
+        } else {
+            locationList.push(locations)
         }
-        if(!locationList.includes(locations.slice(prevComma,locations.length))){
-            locationList.push(locations.slice(prevComma,locations.length))
-        }
-    } else {
-        locationList.push(locations)
     }
 
-    console.log(locations)
-    console.log(locationList)
+    console.log()
+
     return (
     <div id="admin-container">
         <div id="admin-layout">
