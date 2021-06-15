@@ -8,7 +8,7 @@ export function AdminPage(){
 
     const [hintData, setHintData] = useState([""])
     const [text, setText] =useState('')
-    const [locations, setLocations] =useState([]);
+    const [locations, setLocations] =useState('');
 
     var locationList = [];
     let prevComma = 0;
@@ -24,11 +24,18 @@ export function AdminPage(){
 
     function removeDuplicates(allLocations){
         var prevComma = 0;
+
+        allLocations = allLocations.replace(/ /g, '')
         if(allLocations.length > 1 && allLocations.includes(',')){
             for(var i=0;i<allLocations.length;i++){
                 if(allLocations.charAt(i)===','){
-                    locationList.push(allLocations.substring(prevComma,i))
-                    prevComma = i;
+                    var currentLocation = allLocations.substring(prevComma,i)
+                    if(locationList.includes(currentLocation)){
+                        prevComma = i+1
+                    } else {
+                        locationList.push(currentLocation)
+                        prevComma = i+1;
+                    }
                 }
             }
         } else {
@@ -36,9 +43,12 @@ export function AdminPage(){
         }
     }
 
+    function clearLocations() {
+        setLocations('')
+    }
+
         //this fetches the file locations after a user clicks off the input box for emails
     async function fetchLocations(){
-        console.log("method called")
         var url = document.getElementById('old-email').value.toString();
         url = url.replace(/[^a-z0-9@.]/gi,'');
         if(url === null || url === undefined || url.length === 0){
@@ -66,24 +76,32 @@ export function AdminPage(){
         setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
         // deleteFiles(url)
     }
-    if(hintData.includes(oldEmail)){
-        if(locations.length > 1 &&locations.includes(",")){
-            for(let i=0;i<locations.length;i++ && locations.length!==0){
-                if(locations.charAt(i) === ","){
-                    var lastLocation = locations.slice(prevComma,i)
-                    if(!locationList.includes(lastLocation)){
-                        locationList.push(locations.slice(prevComma,i))
-                    }
-                prevComma = i+1;
-                }
-            }
-            if(!locationList.includes(locations.slice(prevComma,locations.length))){
-                locationList.push(locations.slice(prevComma,locations.length))
-            }
-        } else {
-            locationList.push(locations)
-        }
+
+    if(locations !== undefined && locations.length>1){
+        removeDuplicates(locations)
     }
+
+    console.log(locations)
+    console.log(locationList)
+
+    // if(hintData.includes(oldEmail)){
+    //     if(locations.length > 1 &&locations.includes(",")){
+    //         for(let i=0;i<locations.length;i++ && locations.length!==0){
+    //             if(locations.charAt(i) === ","){
+    //                 var lastLocation = locations.slice(prevComma,i)
+    //                 if(!locationList.includes(lastLocation)){
+    //                     locationList.push(locations.slice(prevComma,i))
+    //                 }
+    //             prevComma = i+1;
+    //             }
+    //         }
+    //         if(!locationList.includes(locations.slice(prevComma,locations.length))){
+    //             locationList.push(locations.slice(prevComma,locations.length))
+    //         }
+    //     } else {
+    //         locationList.push(locations)
+    //     }
+    // }
 
 
     return (
@@ -100,6 +118,7 @@ export function AdminPage(){
                     value={text}
                     onChange={e => setText(e.target.value)}
                     pattern="[A-Za-z]"
+                    onFocus={clearLocations}
                     />
                 </Hint>
 
