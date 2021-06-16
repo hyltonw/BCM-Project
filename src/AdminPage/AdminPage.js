@@ -79,7 +79,7 @@ export function AdminPage(){
     }
 
     function transferOwnership(){
-        newEmail = document.getElementById('new-email').value;
+        setNewEmail(document.getElementById('new-email').value)
         var newFileLocation = {
             email : newEmail
         }
