@@ -9,12 +9,14 @@ export function AdminPage(){
     const [hintData, setHintData] = useState([""])
     const [text, setText] =useState('')
     const [locations, setLocations] =useState('');
+    const [newEmail, setNewEmail] = useState('newEmail')
 
-    var locationList = [];
+    let locationList = [];
     let prevComma = 0;
-    var oldEmail = "oldEmail";
-    var newEmail = "newEmail";
-
+    let oldEmail = "oldEmail";
+    let isValidEmail = false;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
     useEffect(() => {
         getAllUsers().then((response) => 
         {
@@ -42,6 +44,17 @@ export function AdminPage(){
             locationList.push(allLocations)
         }
     }
+
+    function updateNewEmail(){
+        if(document.getElementById('new-email').value!==null){
+            setNewEmail(document.getElementById('new-email').value)
+        } else {
+            setNewEmail("")
+        }
+    }
+    isValidEmail = re.test(String(newEmail).toLowerCase())
+    //  && hintData.includes(oldEmail);
+
 
     function clearLocations() {
         setLocations('')
@@ -81,9 +94,6 @@ export function AdminPage(){
         removeDuplicates(locations)
     }
 
-    console.log(locations)
-    console.log(locationList)
-
     // if(hintData.includes(oldEmail)){
     //     if(locations.length > 1 &&locations.includes(",")){
     //         for(let i=0;i<locations.length;i++ && locations.length!==0){
@@ -102,6 +112,8 @@ export function AdminPage(){
     //         locationList.push(locations)
     //     }
     // }
+
+    console.log(isValidEmail)
 
 
     return (
@@ -133,6 +145,8 @@ export function AdminPage(){
                 <input
                 id="new-email"
                 placeholder="new email"
+                onBlur={updateNewEmail}
+                onChange={e => setNewEmail(e.target.value)}
                 />
             </div>
             <div id="transfer-button">
@@ -141,7 +155,7 @@ export function AdminPage(){
             <div>
                 <div id="transfer-button">
                     <p>this will transfer the following {locationList.length} files</p>
-                    <button onClick={transferOwnership} disabled={false}>Transfer</button>
+                    <button onClick={transferOwnership} disabled={!isValidEmail}>Transfer</button>
                 </div>
                 <div id="file-list">
                 <ol>
