@@ -11,10 +11,13 @@ const [displayName, setDisplayName] = useState("USER");
 const [firstName, setFirstName] = useState("")
 const [lastName, setLastName] = useState("")
 const [email, setEmail] = useState("EMAIL")
+const [allChecked, setAllChecked] = useState(false)
 var radioCount = document.querySelectorAll(`input`)
 
 const {url} = useParams();
 
+var checkedLocations;
+var buttonCount;
 var locationList = [];
 let prevComma = 0;
 
@@ -34,7 +37,7 @@ useEffect(()=> {
     setEmail(response.email)
     setLocations(response.location.replace(/\s/g, ''))
     radioCount = document.querySelectorAll(`input`)
-    console.log(radioCount)
+    // console.log(radioCount)
   })
 },[])
 
@@ -98,7 +101,18 @@ function submitForm(){
     }
 }
 
-console.log(locations.length);
+function updateCount(){
+    buttonCount = document.querySelectorAll('input')
+    if(buttonCount.length>0){
+        checkedLocations = 0;
+        for(let i=0;i<buttonCount.length;i++){
+            if(buttonCount[i].checked === true){
+                checkedLocations++;
+            }
+        }
+    }
+    setAllChecked(buttonCount.length/3 === checkedLocations)
+}
 
 return (
     <div>
@@ -118,18 +132,18 @@ return (
                 <div id="generated-file">
                     <p id="filePath">{locations}</p>
                     <div id="buttonDiv">
-                        <input type="radio" value="save" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
+                        <input type="radio" value="save" onChange={updateCount} name={locations} id={locations.substring(locations.length-10,locations.length-5)+"0"}></input>
                         <p>Does not contain sensitive information / Do not delete</p>
-                        <input type="radio" value="delete" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
+                        <input type="radio" value="delete" onChange={updateCount} name={locations} id={locations.substring(locations.length-10,locations.length-5)+"1"}></input>
                         <p>I have deleted this file</p>
-                        <input type="radio" value="send to IT" name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
+                        <input type="radio" value="send to IT" onChange={updateCount} name={locations} id={locations.substring(locations.length-10,locations.length-5)+"2"}></input>
                         <p>send to IT</p>
                     </div>
                 </div>
                 ))}
             </div>
             <p>Verify that all files are marked before submitting this form</p>
-            <button id="submitButton"  onClick={submitForm}>Submit</button>
+            <button id="submitButton" disabled={!allChecked} onClick={submitForm}>Submit</button>
         </div>
         )}
         

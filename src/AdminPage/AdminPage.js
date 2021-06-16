@@ -86,7 +86,9 @@ export function AdminPage(){
         transferFiles(newFileLocation,oldEmail)
         var url = newEmail
         url = url.substring(0, url.indexOf('@'))
-        setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
+        alert("Files transfered")
+        window.location.reload()
+        // setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
         // deleteFiles(url)
     }
 
