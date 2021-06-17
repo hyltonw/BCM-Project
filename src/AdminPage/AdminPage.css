@@ -38,5 +38,11 @@
   height: 300px;
   overflow-y: scroll;
   border-top: solid;
-  border-block-end-width: 5px;
+  border-bottom: solid;
+  border-color: gray;
+}
+
+#transfer-button-div {
+  margin-top: 14px;
+  margin-bottom: 14px;
 }

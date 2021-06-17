@@ -157,9 +157,6 @@ export function AdminPage() {
               <p>
                 this will transfer the following {locationList.length} files
               </p>
-              <button onClick={transferOwnership} disabled={!isValidEmail}>
-                Transfer
-              </button>
             </div>
             <div id="file-list">
               <ol id="ordered-list">
@@ -174,6 +171,11 @@ export function AdminPage() {
             <p>The files will populate here once and email is entered</p>
           </div>
         )}
+      </div>
+      <div id="transfer-button-div">
+        <button onClick={transferOwnership} disabled={!isValidEmail}>
+          Transfer
+        </button>
       </div>
     </div>
   );
