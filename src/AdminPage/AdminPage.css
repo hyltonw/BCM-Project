@@ -32,3 +32,11 @@
   background-color: rgb(255, 254, 254);
   color: black;
 }
+
+#file-list {
+  overflow-wrap: anywhere;
+  height: 300px;
+  overflow-y: scroll;
+  border-top: solid;
+  border-block-end-width: 5px;
+}
