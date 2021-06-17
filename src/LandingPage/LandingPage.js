@@ -26,7 +26,7 @@ useEffect(()=> {
   {
 
 
-    if(response.firstName === "" && response.firstName == null){
+    if(response.firstName === "" || response.firstName == null){
         setDisplayName(response.url)
     } else {
         setFirstName(response.firstName)
@@ -40,6 +40,7 @@ useEffect(()=> {
     // console.log(radioCount)
   })
 },[])
+
 
 if(locations.includes(",") && locations.length > 1){
     for(let i=0;i<locations.length;i++ && locations.length!==0){
