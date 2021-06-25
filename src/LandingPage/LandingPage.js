@@ -79,13 +79,7 @@ function submitForm(){
         // deleteFiles(url)
     } else {
         for(let i=0,j=0;j<locationList.length;i+=3,j++){
-            // console.log(document.querySelectorAll(`input`))
-            // const selection = document.querySelectorAll(`input[name="${locationList[i]}"]`)
             const selection = document.querySelectorAll(`input`)
-            // console.log(locationList[j])
-            // console.log(selection[0])
-            // console.log(selection[1])
-            // console.log(selection[2])
             const ReviewedFile = {
                 firstName : firstName,
                 lastName : lastName,
@@ -95,7 +89,6 @@ function submitForm(){
                 deleteFile : selection[i+1].checked,
                 sendToIT :selection[i+2].checked
             }
-            // console.log(ReviewedFile)
             submitFiles(ReviewedFile)
             // deleteFiles(url)
         }
@@ -151,5 +144,4 @@ return (
     </div>
 )}
 
-//disabled={document.querySelectorAll(`input[name="${locationList[locationList.length-1]}"]`)}
 export default (LandingPage)

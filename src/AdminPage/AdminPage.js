@@ -32,8 +32,8 @@ export function AdminPage() {
 
     allLocations = allLocations.replace(/ /g, "");
     if (allLocations.length > 1 && allLocations.includes(",")) {
-      for (var i = 0; i < allLocations.length; i++) {
-        if (allLocations.charAt(i) === ",") {
+      for (var i = 0; i <= allLocations.length; i++) {
+        if (allLocations.charAt(i) === "," || i === allLocations.length) {
           var currentLocation = allLocations.substring(prevComma, i);
           if (locationList.includes(currentLocation)) {
             prevComma = i + 1;
@@ -102,27 +102,6 @@ export function AdminPage() {
   if (locations !== undefined && locations.length > 1) {
     removeDuplicates(locations);
   }
-
-  // if(hintData.includes(oldEmail)){
-  //     if(locations.length > 1 &&locations.includes(",")){
-  //         for(let i=0;i<locations.length;i++ && locations.length!==0){
-  //             if(locations.charAt(i) === ","){
-  //                 var lastLocation = locations.slice(prevComma,i)
-  //                 if(!locationList.includes(lastLocation)){
-  //                     locationList.push(locations.slice(prevComma,i))
-  //                 }
-  //             prevComma = i+1;
-  //             }
-  //         }
-  //         if(!locationList.includes(locations.slice(prevComma,locations.length))){
-  //             locationList.push(locations.slice(prevComma,locations.length))
-  //         }
-  //     } else {
-  //         locationList.push(locations)
-  //     }
-  // }
-
-  console.log(isValidEmail);
 
   return (
     <div id="admin-container">
