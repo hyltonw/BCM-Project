@@ -23,9 +23,7 @@ export function submitFiles(ReviewedFile) {
   //   ReviewedFile
 
   // );
-  axios.put(`http://localhost:8080/api/files/response`,
-    ReviewedFile
-  )
+  axios.put(`http://localhost:8080/api/files/response`, ReviewedFile);
   window.location.replace(
     `https://main.d31lfvg6uu6z53.amplifyapp.com/submitted`
   );
@@ -45,12 +43,12 @@ export async function transferFiles(newOwner, oldOwner) {
   //   `https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,
   //   newOwner
   // );
-    axios.put(`http://localhost:8080/api/files/${oldOwner}`, newOwner);
+  axios.put(`http://localhost:8080/api/files/${oldOwner}`, newOwner);
 }
 
 export function deleteFiles(url) {
   // axios.delete(`https://bcm-project.bcmfilelverification.com/api/files/${url}`);
-  axios.delete(`http://localhost:8080/api/files/${url}`)
+  axios.delete(`http://localhost:8080/api/files/${url}`);
 }
 
 export default (getAllLocations, submitFiles, getAllUsers, deleteFiles);

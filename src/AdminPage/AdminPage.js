@@ -87,15 +87,18 @@ export function AdminPage() {
     setNewEmail(document.getElementById("new-email").value);
     var newFileLocation = {
       email: newEmail,
+      url: newEmail.substring(0, newEmail.indexOf("@")),
     };
-    transferFiles(newFileLocation, oldEmail);
-    var url = newEmail;
-    url = url.substring(0, url.indexOf("@"));
+    var oldFileLocation = {
+      email: oldEmail,
+      url: oldEmail.substring(0, oldEmail.indexOf("@")),
+    };
+    transferFiles(newFileLocation, oldFileLocation.url);
     alert("Files transfered");
     setTimeout(function () {
       window.location.reload();
     }, 1000);
-    // setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${url}`) }, 1000);
+    // setTimeout(function(){ window.location.replace(`https://main.d31lfvg6uu6z53.amplifyapp.com/user/${newFileLocation.url}`) }, 1000);
     // deleteFiles(url)
   }
 
