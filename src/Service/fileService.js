@@ -16,8 +16,8 @@ export async function getAllLocations(url) {
 }
 
 export function submitFiles(ReviewedFile) {
-  axios.post(
-    `https://bcm-project.bcmfilelverification.com/api/reviewed/`,
+  axios.put(
+    `https://bcm-project.bcmfilelverification.com/api/files/response`,
     ReviewedFile
   );
   // axios.put(`http://localhost:8080/api/files/response`, ReviewedFile);
