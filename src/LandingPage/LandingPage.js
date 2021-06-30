@@ -39,6 +39,7 @@ export function LandingPage() {
       }
       radioCount = document.querySelectorAll(`input`);
       // console.log(radioCount)
+      //   test
     });
   }, []);
 
