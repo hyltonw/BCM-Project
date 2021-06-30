@@ -30,7 +30,7 @@ export async function getAllUsers() {
   const users = await axios.get(
     `https://bcm-project.bcmfilelverification.com/api/files/allUsers`
   );
-  // const users = await axios.get(`http://localhost:8080/api/files/allUsers`)
+  // const users = await axios.get(`http://localhost:8080/api/files/allUsers`);
   const data = users.data;
   return data;
 }
