@@ -8,8 +8,8 @@ import axios from "axios";
 
 export async function getAllLocations(url) {
   const locations = await axios.get(
-    // `https://bcm-project.bcmfilelverification.com/api/files/${url}`
-    `http://localhost:8080/api/files/${url}`
+    `https://bcm-project.bcmfilelverification.com/api/files/${url}`
+    // `http://localhost:8080/api/files/${url}`
   );
   const data = locations.data;
   return data;
