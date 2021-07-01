@@ -183,7 +183,6 @@ export function LandingPage() {
               </div>
             ))}
           </div>
-          <p>Verify that all files are marked before submitting this form</p>
           <button id="submitButton" onClick={submitForm}>
             Submit
           </button>
