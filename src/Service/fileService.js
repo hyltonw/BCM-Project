@@ -8,8 +8,8 @@ import axios from "axios";
 
 export async function getAllLocations(url) {
   const locations = await axios.get(
-    `https://bcm-project.bcmfilelverification.com/api/files/${url}`
-    // `http://localhost:8080/api/files/${url}`
+    // `https://bcm-project.bcmfilelverification.com/api/files/${url}`
+    `http://localhost:8080/api/files/${url}`
   );
   const data = locations.data;
   return data;
@@ -48,4 +48,16 @@ export function deleteFiles(url) {
   // axios.delete(`http://localhost:8080/api/files/${url}`);
 }
 
-export default (getAllLocations, submitFiles, getAllUsers, deleteFiles);
+export function addTransferLog(transferLog) {
+  axios.post(
+    `https://bcm-project.bcmfilelverification.com/api/files/transfer`,
+    transferLog
+  );
+  // axios.post(`http://localhost:8080/api/files/transfer`, transferLog);
+}
+
+export default (getAllLocations,
+submitFiles,
+getAllUsers,
+deleteFiles,
+addTransferLog);

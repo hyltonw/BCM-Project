@@ -6,6 +6,7 @@ import {
   getAllLocations,
   transferFiles,
   deleteFiles,
+  addTransferLog,
 } from "../Service/fileService";
 
 export function AdminPage() {
@@ -94,6 +95,11 @@ export function AdminPage() {
       url: oldEmail.substring(0, oldEmail.indexOf("@")),
     };
     transferFiles(newFileLocation, oldFileLocation.url);
+    var transferLog = {
+      originalFileOwner: oldEmail,
+      newFileOwner: newEmail,
+    };
+    addTransferLog(transferLog);
     alert("Files transfered");
     setTimeout(function () {
       window.location.reload();
@@ -102,7 +108,7 @@ export function AdminPage() {
     // deleteFiles(url)
   }
 
-  if (locations !== undefined && locations.length > 1) {
+  if (locations !== undefined && locations !== null && locations.length > 1) {
     removeDuplicates(locations);
   }
 
