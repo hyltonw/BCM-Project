@@ -8,7 +8,8 @@ import axios from "axios";
 
 export async function getAllLocations(url) {
   const locations = await axios.get(
-    `https://bcm-project.bcmfilelverification.com/api/files/${url}`
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/${url}`
+    // `https://bcm-project.bcmfilelverification.com/api/files/${url}`
     // `http://localhost:8080/api/files/${url}`
   );
   const data = locations.data;
@@ -17,7 +18,9 @@ export async function getAllLocations(url) {
 
 export function submitFiles(ReviewedFile) {
   axios.put(
-    `https://bcm-project.bcmfilelverification.com/api/files/response`,
+    // `https://bcm-project.bcmfilelverification.com/api/files/response`,
+    // ReviewedFile
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/response`,
     ReviewedFile
   );
   // axios.put(`http://localhost:8080/api/files/response`, ReviewedFile);
@@ -28,7 +31,8 @@ export function submitFiles(ReviewedFile) {
 
 export async function getAllUsers() {
   const users = await axios.get(
-    `https://bcm-project.bcmfilelverification.com/api/files/allUsers`
+    // `https://bcm-project.bcmfilelverification.com/api/files/allUsers`
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/allUsers`
   );
   // const users = await axios.get(`http://localhost:8080/api/files/allUsers`);
   const data = users.data;
@@ -37,20 +41,28 @@ export async function getAllUsers() {
 
 export async function transferFiles(newOwner, oldOwner) {
   axios.put(
-    `https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,
+    // `https://bcm-project.bcmfilelverification.com/api/files/${oldOwner}`,
+    // newOwner
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/${oldOwner}`,
     newOwner
   );
   // axios.put(`http://localhost:8080/api/files/${oldOwner}`, newOwner);
 }
 
 export function deleteFiles(url) {
-  axios.delete(`https://bcm-project.bcmfilelverification.com/api/files/${url}`);
+  axios.delete(
+    // `https://bcm-project.bcmfilelverification.com/api/files/${url}`
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/${url}`
+  );
+
   // axios.delete(`http://localhost:8080/api/files/${url}`);
 }
 
 export function addTransferLog(transferLog) {
   axios.post(
-    `https://bcm-project.bcmfilelverification.com/api/files/transfer`,
+    // `https://bcm-project.bcmfilelverification.com/api/files/transfer`,
+    // transferLog
+    `http://bcmapplication-env.eba-yuipzc2r.us-east-2.elasticbeanstalk.com/api/files/transfer`,
     transferLog
   );
   // axios.post(`http://localhost:8080/api/files/transfer`, transferLog);
